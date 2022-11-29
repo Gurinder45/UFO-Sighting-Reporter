@@ -7,10 +7,10 @@ export const REPORTS: Report[] = [
     },
     {
         personName: "bob",
-        personNumber: 2,
+        personNumber: 3,
     },
     {
         personName: "bill",
-        personNumber: 3,
+        personNumber: 2,
     }
 ]

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table'
+import { REPORTS } from 'src/app/mock-report';
+import { Report } from 'src/app/report';
+
+
 
 @Component({
   selector: 'app-table',
@@ -6,9 +12,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+  reports: Report[] = REPORTS;
+  displayedColumns: string[] = ['personName', 'personNumber'];
+  dataSource = new MatTableDataSource(this.reports);
+
+  
+
+  @ViewChild(MatSort) sort!: MatSort;
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.dataSource.sort = this.sort;
   }
-
 }
