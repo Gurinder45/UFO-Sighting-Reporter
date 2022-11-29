@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table'
+import {MatTableDataSource} from '@angular/material/table';
 import { REPORTS } from 'src/app/mock-report';
 import { Report } from 'src/app/report';
-
-
 
 @Component({
   selector: 'app-table',
@@ -16,11 +15,10 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = ['personName', 'personNumber'];
   dataSource = new MatTableDataSource(this.reports);
 
-  
+  @ViewChild(MatSort, { static: true })
+  sort!: MatSort;
 
-  @ViewChild(MatSort) sort!: MatSort;
-  
-  ngOnInit(): void {
+  ngOnInit() {
     this.dataSource.sort = this.sort;
   }
 }
