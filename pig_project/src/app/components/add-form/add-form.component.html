@@ -1,0 +1,17 @@
+<div id="main">
+    <h4>Create Report</h4>
+    <form action="/action_page.php" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="name" id="name">
+        </div>
+        <div class="form-group">
+          <label for="number">Number:</label>
+          <input type="text" class="form-control" name="number" [(ngModel)]="number" id="number">
+        </div>
+        <div id="btn-div">
+            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelPressed()">Cancel</button>
+        </div>
+      </form>
+</div>

@@ -33,7 +33,7 @@ export class TableComponent implements OnInit{
     });
   }
 
-  deleteReports(): void {
+  deleteAllReports(): void {
     this.pigService.deleteReport().subscribe((reports) => {
       this.reports = [];
       this.dataSource = new MatTableDataSource(this.reports);
@@ -41,7 +41,7 @@ export class TableComponent implements OnInit{
     }); 
   }
 
-  postReport(report: Report) {
+  deleteReport(report: Report) {
     let index = this.reports.indexOf(report);
     if( index == -1) {
       return;
@@ -51,19 +51,27 @@ export class TableComponent implements OnInit{
       key: "reports",
       data: this.reports
     };
-    this.deleteReports();
+    this.updateReports(obj);
+  }
+
+  addReport(report: Report): void {
+    this.reports.push(report);
+    const obj = {
+      key: "reports",
+      data: this.reports
+    };
+    this.updateReports(obj);
+    
+  }
+
+  updateReports(obj: Object): void {
+    this.deleteAllReports();
     this.pigService.postReports(obj).subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
       this.dataSource = new MatTableDataSource(this.reports);
       this.dataSource.sort = this.sort;
     });
-    
-
-
-
-
-
 
   }
 }

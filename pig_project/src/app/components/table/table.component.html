@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element"> <button (click)="postReport(element)" class="btn btn-outline-danger" >X</button></td>
+      <td mat-cell *matCellDef="let element"> <button (click)="deleteReport(element)" class="btn btn-outline-danger" >X</button></td>
     </ng-container>
   
     <!-- Symbol Column -->
@@ -28,6 +28,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <app-add-button></app-add-button>
+  <app-add-button (onAddReport)="addReport($event)"></app-add-button>
 
   

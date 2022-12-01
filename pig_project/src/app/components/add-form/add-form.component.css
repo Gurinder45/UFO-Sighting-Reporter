@@ -1,0 +1,22 @@
+
+#main {
+    margin: 20px;
+    padding: 10px;
+    border: 2px solid green;
+
+}
+
+h4 {
+    color:  green;
+    margin-bottom: 30px;
+}
+
+button {
+    margin: 10px;
+}
+
+#btn-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
