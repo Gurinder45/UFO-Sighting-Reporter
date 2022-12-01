@@ -1,3 +1,6 @@
-<div (click)=toggleAddForm()>ADD PIG</div>
-<app-add-form *ngIf="showAddForm" (onAddReport)="addReport($event)" (onCancelReport)="toggleAddForm()" ></app-add-form>
-<app-more-info *ngIf="showMoreInfo" [moreInfoReport]="moreInfoReport" (onRemoveInformation)="removeMoreInfo()"></app-more-info>
+<div id="btn" (click)=toggleAddForm()>ADD PIG</div>
+
+<div id="forms">
+    <app-add-form *ngIf="showAddForm" (onAddReport)="addReport($event)" (onCancelReport)="toggleAddForm()" ></app-add-form>
+    <app-more-info *ngIf="showMoreInfo" [moreInfoReport]="moreInfoReport" (onRemoveInformation)="removeMoreInfo()"></app-more-info>
+</div>

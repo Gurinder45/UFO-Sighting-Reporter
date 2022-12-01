@@ -1,7 +1,8 @@
 import { Component, AfterViewInit} from '@angular/core';
 import * as L from 'leaflet';
-
+import { PigService } from 'src/app/services/pig.service';
 import { icon, Marker } from 'leaflet';
+import { Report } from 'src/app/report';
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -17,18 +18,19 @@ const iconDefault = icon({
 });
 Marker.prototype.options.icon = iconDefault;
 
-
-
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements AfterViewInit {
+  reports: Report[] = [];
   private map!: L.Map;
-  constructor() {}
+  constructor(private pigService: PigService) {}
 
+  ngOnInit() {
+    this.loadReports();
+  }
 
   ngAfterViewInit(): void {
     this.map = L.map("mapid").setView([49.2, -123], 11);
@@ -41,13 +43,21 @@ export class MapComponent implements AfterViewInit {
         tileSize: 512,
         zoomOffset: -1
     }).addTo(this.map);
-
-    L.marker([49.2276, -123.0076]).addTo(this.map)
-    .bindPopup("<b>Metrotown</b><br /> cases reported.").openPopup();
-
-    L.marker([49.1867, -122.8490]).addTo(this.map)
-    .bindPopup("<b>SFU Surrey</b><br /> cases reported.").openPopup();
   }
 
+  loadReports(): void {
+    this.pigService.getReports().subscribe((reports) => {
+      let temp:any = reports;
+      this.reports = temp.data;
+      this.addMarkers();
+    });
+  }
 
+  addMarkers(): void {
+    
+    this.reports.forEach((report) => {
+      L.marker([parseFloat(report.lat), parseFloat(report.long)]).addTo(this.map)
+    .bindPopup("<b>"+ report.location + "</b><br /> cases reported.");
+    })
+  }
 }

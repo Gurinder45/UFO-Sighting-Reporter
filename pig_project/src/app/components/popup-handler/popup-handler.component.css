@@ -1,5 +1,5 @@
 
-div {
+#btn {
     background-color: rgb(51, 167, 78);
     color: white;
     height: 40px;
@@ -8,7 +8,12 @@ div {
     align-items: center;
 }
 
-div:hover {
+#btn:hover {
     background-color: rgb(48, 144, 70);
+}
 
+#forms {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
 }

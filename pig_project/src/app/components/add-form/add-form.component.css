@@ -1,8 +1,8 @@
 
 #main {
-    margin: 20px;
     padding: 10px;
     border: 2px solid green;
+    width: 500px;
 }
 
 h4 {

@@ -1,5 +1,5 @@
 
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, MatTableDataSourcePaginator} from '@angular/material/table';
 import { Report } from 'src/app/report';
@@ -12,6 +12,7 @@ import { Md5 } from 'ts-md5';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit{
+  @Output() onRefreshReports = new EventEmitter();
   reports: Report[] = [];
   report!: Report;
   showMoreInfo: boolean = false;
@@ -76,6 +77,7 @@ export class TableComponent implements OnInit{
       this.reports = temp.data;
       this.dataSource = new MatTableDataSource(this.reports);
       this.dataSource.sort = this.sort;
+      this.onRefreshReports.emit();
     });
   }
 
@@ -103,7 +105,7 @@ export class TableComponent implements OnInit{
         return true;
       }
     }
-    alert("Incorrect Password")
+    alert("Action Denied")
     return false;
 
   }
