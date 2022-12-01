@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 import { MapComponent } from './components/map/map.component';
-import { ReportsComponent } from './components/reports/reports.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -20,7 +19,6 @@ import { MoreInfoComponent } from './components/more-info/more-info.component';
     AppComponent,
     TableComponent,
     MapComponent,
-    ReportsComponent,
     AddFormComponent,
     PopupHandlerComponent,
     MoreInfoComponent,
