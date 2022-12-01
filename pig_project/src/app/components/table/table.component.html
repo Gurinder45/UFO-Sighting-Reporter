@@ -1,33 +1,41 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
   
+     <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="personName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Reported By </th>
       <td mat-cell *matCellDef="let element"> {{element.personName}} </td>
     </ng-container>
   
  
-    <ng-container matColumnDef="personNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.personNumber}} </td>
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Time Reported </th>
+      <td mat-cell *matCellDef="let element"> {{element.time}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element"> <button (click)="toggleStatus(element)" class="btn btn-light" >{{element.status}} </button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="more-info">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> <button (click)="displayMoreInfo(element)" class="btn btn-light" >More Info</button></td>
+    </ng-container>
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element"> <button (click)="deleteReport(element)" class="btn btn-outline-danger" >X</button></td>
     </ng-container>
   
-    <!-- Symbol Column -->
-    <!-- <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container> -->
-  
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <app-add-button (onAddReport)="addReport($event)"></app-add-button>
+  <app-popup-handler [report]="report" [showMoreInfo]="showMoreInfo" (onAddReport)="addReport($event)" (onRmvMoreInfo)="rmvMoreInfo()"></app-popup-handler>
 
   

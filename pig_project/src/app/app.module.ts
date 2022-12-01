@@ -11,8 +11,9 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { AddButtonComponent } from './components/add-button/add-button.component';
 import { AddFormComponent } from './components/add-form/add-form.component';
+import { PopupHandlerComponent } from './components/popup-handler/popup-handler.component';
+import { MoreInfoComponent } from './components/more-info/more-info.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { AddFormComponent } from './components/add-form/add-form.component';
     TableComponent,
     MapComponent,
     ReportsComponent,
-    AddButtonComponent,
     AddFormComponent,
+    PopupHandlerComponent,
+    MoreInfoComponent,
   ],
   imports: [
     BrowserModule,

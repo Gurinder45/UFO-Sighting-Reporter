@@ -3,7 +3,6 @@
     margin: 20px;
     padding: 10px;
     border: 2px solid green;
-
 }
 
 h4 {
@@ -19,4 +18,12 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.form-group {
+    margin: 20px 80px;
+}
+
+.row {
+    margin: 20px 70px;
 }

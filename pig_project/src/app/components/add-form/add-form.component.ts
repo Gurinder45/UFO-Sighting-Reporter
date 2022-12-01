@@ -11,21 +11,34 @@ export class AddFormComponent {
   @Output() onCancelReport = new EventEmitter();
   name!: string;
   number!: string;
+  breed!: string;
+  pid!: string;
+  location!: string;
+  lat!: string;
+  long!: string;
+  notes!: string;
+ 
 
   onSubmit(): void {
     const newReport = {
       personName: this.name,
-      personNumber: this.number
+      personNumber: this.number,
+      breed: this.breed,
+      pid: this.pid,
+      location: this.location,
+      lat: this.lat,
+      long: this.long,
+      notes: this.notes,
+      status: "Ready for Pickup"
     }
 
     this.onAddReport.emit(newReport);
 
-    this.name = '';
-    this.number = '';
+    this.hideForm();
 
   }
 
-  cancelPressed(): void {
+  hideForm(): void {
     this.onCancelReport.emit();
 
   }

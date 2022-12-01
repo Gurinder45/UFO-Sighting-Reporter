@@ -7,3 +7,8 @@ div {
     justify-content: center;
     align-items: center;
 }
+
+div:hover {
+    background-color: rgb(48, 144, 70);
+
+}
