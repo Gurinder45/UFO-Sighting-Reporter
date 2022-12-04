@@ -7,6 +7,6 @@ export interface Report {
     lat: string;
     long: string;
     notes: string;
-    time?: number;
+    time: number;
     status: string;
 }

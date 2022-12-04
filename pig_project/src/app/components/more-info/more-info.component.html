@@ -35,8 +35,8 @@
             <td>{{moreInfoReport.notes}}</td>
           </tr>
           <tr>
-            <td>Time:</td>
-            <td>IMPLEMENT</td>
+            <td>Time Reported:</td>
+            <td>{{ moreInfoReport.time | date:'yyyy-MM-dd (hh:mm a)' }}</td>
           </tr>
           <tr>
             <td>Status:</td>
@@ -44,5 +44,7 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-secondary" (click)="removeInformation()">Okay</button>
+      <div id="btn-div">
+        <button type="button" class="btn btn-secondary" (click)="removeInformation()">Okay</button>
+      </div>
 </div>

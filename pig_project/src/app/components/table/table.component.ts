@@ -37,11 +37,12 @@ export class TableComponent implements OnInit{
     });
   }
 
-  deleteAllReports(): void {
+  deleteAllReports(obj: Object): void {
     this.pigService.deleteReport().subscribe((reports) => {
       this.reports = [];
       this.dataSource = new MatTableDataSource(this.reports);
       this.dataSource.sort = this.sort;
+      this.updateReports(obj);
     }); 
   }
 
@@ -56,7 +57,7 @@ export class TableComponent implements OnInit{
       key: "reports",
       data: this.reports
     };
-    this.updateReports(obj);
+    this.deleteAllReports(obj);
     }
   }
 
@@ -66,12 +67,10 @@ export class TableComponent implements OnInit{
       key: "reports",
       data: this.reports
     };
-    this.updateReports(obj);
-    
+    this.deleteAllReports(obj); 
   }
 
   updateReports(obj: Object): void {
-    this.deleteAllReports();
     this.pigService.postReports(obj).subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
@@ -92,7 +91,7 @@ export class TableComponent implements OnInit{
         key: "reports",
         data: this.reports
       };
-      this.updateReports(obj);
+      this.deleteAllReports(obj);
     }
   }
 
@@ -107,7 +106,6 @@ export class TableComponent implements OnInit{
     }
     alert("Action Denied")
     return false;
-
   }
 
   displayMoreInfo(report:Report): void {

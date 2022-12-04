@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import { PigService } from 'src/app/services/pig.service';
 import { icon, Marker } from 'leaflet';
 import { Report } from 'src/app/report';
+
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -26,6 +27,7 @@ Marker.prototype.options.icon = iconDefault;
 export class MapComponent implements AfterViewInit {
   reports: Report[] = [];
   private map!: L.Map;
+  markers = new L.FeatureGroup();
   constructor(private pigService: PigService) {}
 
   ngOnInit() {
@@ -49,15 +51,43 @@ export class MapComponent implements AfterViewInit {
     this.pigService.getReports().subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
+      this.map.removeLayer(this.markers);
+      this.markers.clearLayers();
       this.addMarkers();
     });
   }
 
   addMarkers(): void {
-    
+    let locations: { location: string; lat: string; long: string; count: number; }[] =[];
+    let added:boolean = false;
     this.reports.forEach((report) => {
-      L.marker([parseFloat(report.lat), parseFloat(report.long)]).addTo(this.map)
-    .bindPopup("<b>"+ report.location + "</b><br /> cases reported.");
+      added = false;
+      let locationAddress = {
+        location: report.location,
+        lat: report.lat,
+        long: report.long,
+        count: 1
+      }
+      if(locations.length > 0) {
+        for(let i = 0; i < locations.length; i++) {
+          if (report.location == locations[i].location && report.lat == locations[i].lat && report.long == locations[i].long ) {
+            locations[i].count++;
+            added = true;
+            break;
+          }
+        }
+        if(!added) {
+          locations.push(locationAddress);
+        }  
+      } else {
+        locations.push(locationAddress);
+      }
     })
+    locations.forEach((address) => {
+     let marker = L.marker([parseFloat(address.lat), parseFloat(address.long)]).addTo(this.map)
+    .bindPopup("<b>"+ address.location + "</b><br /> Cases Reported: " + address.count);
+    this.markers.addLayer(marker);
+    })
+    this.map.addLayer(this.markers);
   }
 }

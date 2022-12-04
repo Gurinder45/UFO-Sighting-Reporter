@@ -13,7 +13,6 @@ export class AppComponent {
   @ViewChild(MapComponent) map!: MapComponent;
 
   refresh(): void {
-    console.log("from app");
     this.map.loadReports();
   }
 }

@@ -14,7 +14,7 @@
  
     <ng-container matColumnDef="time">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Time Reported </th>
-      <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.time | date:'yyyy-MM-dd (h:mm a)' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
