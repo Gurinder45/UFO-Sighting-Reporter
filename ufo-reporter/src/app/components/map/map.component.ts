@@ -1,6 +1,6 @@
 import { Component, AfterViewInit} from '@angular/core';
 import * as L from 'leaflet';
-import { PigService } from 'src/app/services/pig.service';
+import { UfoService } from 'src/app/services/ufo.service';
 import { icon, Marker } from 'leaflet';
 import { Report } from 'src/app/report';
 
@@ -28,7 +28,7 @@ export class MapComponent implements AfterViewInit {
   reports: Report[] = [];
   private map!: L.Map;
   markers = new L.FeatureGroup();
-  constructor(private pigService: PigService) {}
+  constructor(private ufoService: UfoService) {}
 
   ngOnInit() {
     this.loadReports();
@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   loadReports(): void {
-    this.pigService.getReports().subscribe((reports) => {
+    this.ufoService.getReports().subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
       this.map.removeLayer(this.markers);

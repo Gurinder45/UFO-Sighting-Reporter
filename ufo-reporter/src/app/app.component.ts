@@ -8,7 +8,7 @@ import { MapComponent } from './components/map/map.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'pig_project';
+  title = 'UFO Sighting Reporter';
 
   @ViewChild(MapComponent) map!: MapComponent;
 

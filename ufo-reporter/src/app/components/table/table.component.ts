@@ -3,7 +3,7 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, MatTableDataSourcePaginator} from '@angular/material/table';
 import { Report } from 'src/app/report';
-import { PigService } from 'src/app/services/pig.service';
+import { UfoService } from 'src/app/services/ufo.service';
 import { Md5 } from 'ts-md5';
 
 @Component({
@@ -19,7 +19,7 @@ export class TableComponent implements OnInit{
   displayedColumns: string[] = ['location', 'personName', 'time', 'status', 'more-info', 'delete'];
   dataSource!: MatTableDataSource<Report, MatTableDataSourcePaginator>;
   
-  constructor(private pigService: PigService) { }
+  constructor(private ufoService: UfoService) { }
 
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
@@ -29,7 +29,7 @@ export class TableComponent implements OnInit{
   }
 
   loadReports(): void {
-    this.pigService.getReports().subscribe((reports) => {
+    this.ufoService.getReports().subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
       this.dataSource = new MatTableDataSource(this.reports);
@@ -38,7 +38,7 @@ export class TableComponent implements OnInit{
   }
 
   deleteAllReports(obj: Object): void {
-    this.pigService.deleteReport().subscribe((reports) => {
+    this.ufoService.deleteReport().subscribe((reports) => {
       this.reports = [];
       this.dataSource = new MatTableDataSource(this.reports);
       this.dataSource.sort = this.sort;
@@ -71,7 +71,7 @@ export class TableComponent implements OnInit{
   }
 
   updateReports(obj: Object): void {
-    this.pigService.postReports(obj).subscribe((reports) => {
+    this.ufoService.postReports(obj).subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
       this.dataSource = new MatTableDataSource(this.reports);
@@ -82,10 +82,10 @@ export class TableComponent implements OnInit{
 
   toggleStatus(report:Report): void {
     if (this.passwordCheck()) {
-      if (report.status == "Ready for Pickup") {
-        report.status = "Retrieved";
+      if (report.status == "Under Investigation") {
+        report.status = "Investigated";
       } else {
-        report.status = "Ready for Pickup";
+        report.status = "Under Investigation";
       }
       const obj = {
         key: "reports",
@@ -96,7 +96,7 @@ export class TableComponent implements OnInit{
   }
 
   passwordCheck(): boolean {
-    const password = prompt("To confirm this action, please enter your password:")
+    const password = prompt("To confirm this action, please enter the password:")
     const md5 = new Md5();
     if (password) {
       const encrypted = md5.appendStr(password).end();

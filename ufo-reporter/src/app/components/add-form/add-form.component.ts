@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter} from '@angular/core';
 import { ItemsList } from '@ng-select/ng-select/lib/items-list';
 import { Report } from 'src/app/report';
-import { PigService } from 'src/app/services/pig.service';
+import { UfoService } from 'src/app/services/ufo.service';
 
 @Component({
   selector: 'app-add-form',
@@ -17,17 +17,15 @@ export class AddFormComponent {
   selectedLocation!: { location: string; lat: string; long: string; combined: string; };
   name!: string;
   number!: string;
-  breed!: string;
-  pid!: string;
   location: string = "";
   lat: string = "";
   long: string = "";
   notes!: string;
 
-  constructor(private pigService: PigService) {}
+  constructor(private ufoService: UfoService) {}
  
   ngOnInit() {
-    this.pigService.getReports().subscribe((reports) => {
+    this.ufoService.getReports().subscribe((reports) => {
       let temp:any = reports;
       this.reports = temp.data;
       this.getUniqueLocations();
@@ -39,14 +37,12 @@ export class AddFormComponent {
       const newReport = {
         personName: this.name,
         personNumber: this.number,
-        breed: this.breed,
-        pid: this.pid,
         location: this.location,
         lat: this.lat,
         long: this.long,
         notes: this.notes,
         time: (new Date().getTime()),
-        status: "Ready for Pickup"
+        status: "Under Investigation"
       }
       if(!this.showNewLocation) {
         newReport.location = this.selectedLocation.location;
@@ -95,10 +91,6 @@ export class AddFormComponent {
     if(/^\d{3}-\d{3}-\d{4}$/.test(this.number) == false) {
       alert("Enter a 10 digit phone number in form '###-###-####'");
       return false;
-    }
-    if(isNaN(Number(this.pid))) {
-      alert("Enter only integers for Pid");
-      return false;  
     }
   return true;
   }

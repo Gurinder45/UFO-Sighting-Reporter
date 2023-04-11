@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PigService {
+export class UfoService {
   reports: Report[] = [];
   constructor(private http:HttpClient) {}
 
